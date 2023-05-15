@@ -1,0 +1,73 @@
+.OuterContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.FormContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 400px;
+  height: 600px;
+  min-width: 250px;
+  min-height: 550px;
+  flex-direction: column;
+  box-shadow: 0px 12px 12px -10px;
+  padding: 1vmax;
+  margin: 2vmax;
+  background-color: white;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Form h2 {
+  text-align: center;
+}
+
+.Form label {
+  margin-bottom: 1vh;
+}
+
+.Form input {
+  margin-bottom: 3vh;
+  padding: 0;
+  width: 99%;
+  height: 5vh;
+  border: none;
+  border-bottom: solid thin;
+}
+
+.SignInContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+
+.SignInContainer a {
+  margin-left: 15px;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+}
+
+.ButtonClose {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
+.ErrorContainer {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 0, 0, 0.25);
+}

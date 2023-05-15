@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap");
+
+.OverallContainer2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+.TitleContainer {
+  display: flex;
+  margin: 2vmax;
+  border-bottom: solid thin;
+  color: rgb(0, 0, 0);
+  font-family: "Kanit";
+}
+
+.AddCommentContainer {
+  display: flex;
+}
+
+.AddComment {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 80vw;
+  height: 200px;
+  border: none;
+  font-family: "Kanit";
+}
+
+.AddComment input {
+  display: flex;
+  position: relative;
+  text-align: start;
+  width: 99.8%;
+  height: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid thin;
+  font-size: 20px;
+  background-color: transparent;
+  word-break: normal;
+}
+
+.AddComment button {
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.Questions {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 80vw;
+  border-bottom: solid thin;
+  margin-top: 9vh;
+  margin-bottom: 2vh;
+  align-content: baseline;
+  font-family: "Kanit";
+  box-shadow: 0px 12px 12px -14px;
+}
+
+.Questions p1 {
+  margin: 0;
+  padding: 1vmax;
+  height: auto;
+  text-transform: capitalize;
+  font-size: 1.2vmax;
+  display: flex;
+  justify-content: flex-start;
+  white-space: normal;
+  word-break: break-all;
+}
+
+.TimeStamp {
+  margin-bottom: 1vh;
+  padding: 0;
+  height: auto;
+  font-size: 0.8vmax;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.User {
+  margin-bottom: 1vh;
+  padding: 0;
+  height: auto;
+  font-size: 0.8vmax;
+  display: flex;
+  justify-content: flex-start;
+}

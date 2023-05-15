@@ -1,0 +1,33 @@
+.OverallContainer {
+  display: flex;
+  width: 100%;
+  background-color: grey;
+  justify-content: center;
+}
+
+.SecondContainer {
+  display: flex;
+  width: 60%;
+  background-color: aliceblue;
+  flex-direction: column;
+}
+
+.WeekContainer {
+  display: flex;
+  width: 100%;
+  background-color: aquamarine;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2vmax;
+  padding-bottom: 2vmax;
+}
+
+.CalendarContainer {
+  display: flex;
+  width: 100%;
+  background-color: violet;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2vmax;
+  padding-bottom: 2vmax;
+}

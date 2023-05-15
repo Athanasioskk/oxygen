@@ -1,0 +1,59 @@
+.DashBoardContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.FirstContainer {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.NameContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding-top: 3vmax;
+  padding-bottom: 3vmax;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NameContainer p {
+  font-size: larger;
+  border-bottom: solid thin;
+  box-shadow: 0px 10px 10px -10px;
+}
+
+.DataContainer {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  height: 100%;
+  background-color: rgb(197, 197, 197);
+}
+
+.DataDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  background-color: rgb(176, 179, 182);
+}
+
+.Info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.Link {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}

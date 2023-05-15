@@ -1,0 +1,54 @@
+.PersonalInfo {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.PersonalInfo form {
+  display: flex;
+  flex-direction: column;
+  padding: 2vmax;
+  min-width: 350px;
+  height: 70%;
+  background-color: rgb(255, 255, 255);
+  justify-content: space-evenly;
+}
+
+.PersonalInfo input {
+  display: flex;
+  width: 100%;
+  height: max-content;
+  border: none;
+  border-bottom: solid thin;
+  background-color: transparent;
+  font-size: larger;
+}
+
+.PersonalInfo select {
+  display: flex;
+  width: 100%;
+  height: max-content;
+  border: none;
+  border-bottom: solid thin;
+  background-color: transparent;
+  font-size: larger;
+}
+
+.PersonalInfo label {
+  display: flex;
+  width: 100%;
+  height: max-content;
+  border: none;
+  background-color: transparent;
+  font-size: larger;
+}
+
+.PersonalInfo button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}

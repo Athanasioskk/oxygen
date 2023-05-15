@@ -1,0 +1,45 @@
+.ProfileOverAllContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+.HeaderContainer {
+  display: flex;
+  padding-bottom: 15vh;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+}
+
+.HeaderContainer h4 {
+  font-size: larger;
+  border-bottom: solid thin;
+  padding: 2vmax;
+  box-shadow: 0px 10px 10px -14px;
+}
+
+.HeaderContainer p {
+  border-bottom: solid thin;
+  padding: 2vmax;
+  box-shadow: 0px 10px 10px -14px;
+}
+
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+}
+
+.LoginContainer h5 {
+  font-size: larger;
+
+  border-bottom: solid thin;
+}

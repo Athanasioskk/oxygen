@@ -1,0 +1,23 @@
+.FooterContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  padding: 1vmax;
+  background-color: rgb(255, 255, 255);
+}
+
+.LeftContainer {
+  display: flex;
+  margin: 1vmax;
+}
+
+.MiddleContainer {
+  display: flex;
+  margin: 1vmax;
+}
+
+.RightContainer {
+  display: flex;
+  margin: 1vmax;
+}
