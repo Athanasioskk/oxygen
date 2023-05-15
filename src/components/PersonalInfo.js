@@ -77,6 +77,7 @@ function PersonalInfo() {
       console.error("Error updating user info:", error);
       setLoading(false);
     }
+    return  window.location.reload();
   };
 
   return (

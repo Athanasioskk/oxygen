@@ -23,15 +23,41 @@ function DashBoard() {
         setAuthUser(user);
         const userId = user.uid;
 
+        class Users {
+          constructor(username, gender, dob) {
+            this.username = username;
+            this.gender = gender;
+            this.dob = dob;
+          }
+          toString() {
+            return this.name + ", " + this.gender + ", " + this.dob;
+          }
+        }
+
+        const userConverter = {
+          toFirestore: (users) => {
+            return {
+              username: users.username,
+              gender: users.gender,
+              dob: users.dob,
+            };
+          },
+          fromFirestore: (snapshot, options) => {
+            const data = snapshot.data(options);
+            return new Users(data.username, data.gender, data.dob);
+          },
+        };
+
         async function fetchData() {
-          const docRef = doc(db, "users", userId);
+          const docRef = doc(db, "users", userId).withConverter(userConverter);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             setIsNewUser(false);
+            const userData = docSnap.data();
             setFormData({
-              username: docSnap.data("username").toString(),
-              gender: docSnap.data("gender").toString(),
-              dob: docSnap.data("dob").toString(),
+              username: userData.username,
+              gender: userData.gender,
+              dob: userData.dob,
             });
             console.log(docSnap.data());
             history("/Profile/DashBoard");
@@ -71,9 +97,9 @@ function DashBoard() {
               <div className="DataContainer">
                 <div className="DataDisplay">
                   <div className="Info">
-                    <p>{`${formData.username}`}</p>
-                    <p>{`${formData.gender}`}</p>
-                    <p>{`${formData.dob}`}</p>
+                    <p>{formData.username}</p>
+                    <p>{formData.gender}</p>
+                    <p>{formData.dob}</p>
                   </div>
                   <div className="Link">
                     <Link
