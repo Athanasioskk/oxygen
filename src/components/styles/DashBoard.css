@@ -1,13 +1,11 @@
 .DashBoardContainer {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   overflow: hidden;
 }
 
 .FirstContainer {
-  height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -18,10 +16,11 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  padding-top: 3vmax;
-  padding-bottom: 3vmax;
+  padding-top: 4vmax;
+  padding-bottom: 4vmax;
   justify-content: space-between;
   align-items: center;
+  background-color: rgb(212, 212, 212);
 }
 
 .NameContainer p {
@@ -30,30 +29,121 @@
   box-shadow: 0px 10px 10px -10px;
 }
 
+.NameContainer button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+}
+
+.AnotherContainer {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  padding: 1vmax;
+  gap: 5vmax;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 8px 8px -8px;
+}
+
 .DataContainer {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  justify-content: center;
+  height: fit-content;
+  gap: 10vmax;
+  padding: 1vmax;
+}
+
+.PictureAndName {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.Picture {
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  white-space: pre-wrap;
+}
+
+.Picture input {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+}
+
+.Picture img {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   height: 100%;
-  background-color: rgb(197, 197, 197);
+  display: flex;
+  background-size: 3vmax;
+  aspect-ratio: 2/1;
+  background-color: transparent;
+}
+
+.Name {
+  width: fit-content;
+  font-size: 1.3rem;
 }
 
 .DataDisplay {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 50%;
-  background-color: rgb(176, 179, 182);
+  height: 100%;
+  gap: 10vmax;
+}
+
+.QRcode {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  justify-content: start;
+  align-items: start;
+  padding: 1vmax;
+  border: solid thin;
+  border-radius: 10px;
 }
 
 .Info {
   display: flex;
   flex-direction: column;
   align-items: start;
+  gap: 1rem;
+}
+
+.Info label {
+  font-size: 1rem;
+  background-color: transparent;
+}
+
+.Info input {
+  font-size: 1.1rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid thin;
+  border-left: solid thin;
 }
 
 .Link {
   display: flex;
   flex-direction: column;
   align-items: start;
+  padding-left: 3vmax;
+  font-size: 10px;
+  font-style: oblique;
 }

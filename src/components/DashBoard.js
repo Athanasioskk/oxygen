@@ -5,6 +5,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import QRCode from "react-qr-code";
+import female from "../assets/images/female.svg";
+import male from "../assets/images/male.svg";
 
 function DashBoard() {
   const [authUser, setAuthUser] = useState(null);
@@ -16,6 +19,12 @@ function DashBoard() {
   });
   const history = useNavigate();
   let location = useLocation();
+  const [logoutTime, setLogoutTime] = useState(null);
+  const LOGOUT_THRESHOLD = 2 * 60 * 60 * 1000; //2 hours in milliseconds
+  const [qrCodeData, setQrCodeData] = useState("");
+  const maleProfile = male;
+  const femaleProfile = female;
+  const [profilePic, setProfilePic] = useState(null);
 
   useEffect(() => {
     const listen = onAuthStateChanged(getAuth(), (user) => {
@@ -60,6 +69,13 @@ function DashBoard() {
               dob: userData.dob,
             });
             console.log(docSnap.data());
+            setQrCodeData(`${userData.username}\n${user.email}`);
+            if (userData.gender == "Male") {
+              setProfilePic(maleProfile);
+            }
+            if (userData.gender == "Female") {
+              setProfilePic(femaleProfile);
+            }
             history("/Profile/DashBoard");
           } else {
             setIsNewUser(true);
@@ -93,27 +109,55 @@ function DashBoard() {
         <div className="NameContainer">
           {authUser ? (
             <>
-              <p>Your are now logged in</p>
-              <div className="DataContainer">
-                <div className="DataDisplay">
-                  <div className="Info">
-                    <p>{formData.username}</p>
-                    <p>{formData.gender}</p>
-                    <p>{formData.dob}</p>
+              <div className="AnotherContainer">
+                <div className="PictureAndName">
+                  <div className="Picture">
+                    <img src={profilePic} alt="Profle pic"></img>
                   </div>
-                  <div className="Link">
-                    <Link
-                      to={{
-                        pathname: `/Profile/DashBoard/PersonalInfo`,
-                        state: { background: location },
-                      }}
-                    >
-                      <p>Click here to update your Info</p>
-                    </Link>
-                    <Outlet />
+                  <div className="Name">
+                    Welcome to your profile, {formData.username}.
+                  </div>
+                </div>
+                <div className="DataContainer">
+                  <div className="DataDisplay">
+                    <div className="Info">
+                      <label>Username:</label>
+                      <input
+                        type="text"
+                        disabled={true}
+                        placeholder={formData.username}
+                      ></input>
+                      <label>Gender:</label>
+                      <input
+                        type="text"
+                        disabled={true}
+                        placeholder={formData.gender}
+                      ></input>
+                      <label>Date of birth:</label>
+                      <input
+                        type="text"
+                        disabled={true}
+                        placeholder={formData.dob}
+                      ></input>
+                    </div>
+                    <div className="Link">
+                      <Link
+                        to={{
+                          pathname: `/Profile/DashBoard/PersonalInfo`,
+                          state: { background: location },
+                        }}
+                      >
+                        <p>Click here to update your Info</p>
+                      </Link>
+                      <Outlet />
+                    </div>
+                  </div>
+                  <div className="QRcode">
+                    <QRCode value={qrCodeData} />
                   </div>
                 </div>
               </div>
+
               <button onClick={userSignOut}>Log Out</button>
             </>
           ) : (
