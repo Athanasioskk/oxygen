@@ -19,7 +19,6 @@ function DashBoard() {
   });
   const history = useNavigate();
   let location = useLocation();
-  const [logoutTime, setLogoutTime] = useState(null);
   const LOGOUT_THRESHOLD = 2 * 60 * 60 * 1000; //2 hours in milliseconds
   const [qrCodeData, setQrCodeData] = useState("");
   const maleProfile = male;
@@ -83,6 +82,10 @@ function DashBoard() {
           }
         }
         fetchData();
+        const timer = setTimeout(() => {
+          userSignOut();
+        }, LOGOUT_THRESHOLD);
+        return () => clearTimeout(timer);
       } else {
         setIsNewUser(false);
         setAuthUser(null);
