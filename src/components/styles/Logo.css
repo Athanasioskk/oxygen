@@ -7,9 +7,11 @@
   background-color: rgb(255, 255, 255);
   padding-top: 5vmax;
   padding-bottom: 5vmax;
+  z-index: 100;
 }
 
 .Image {
+  z-index: 100;
   display: flex;
   justify-content: center;
   width: 100%;
