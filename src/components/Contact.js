@@ -12,6 +12,9 @@ import {
   Marker,
   Popup,
 } from "react-leaflet";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import 'material-symbols';
 
 function Contact() {
   const [authUser, setAuthUser] = useState(null);
@@ -32,6 +35,9 @@ function Contact() {
   //   return () => listen();
   // }, []);
 
+
+
+
   return (
     <div className="ContactContainer">
       <div className="ContactInfo">
@@ -44,13 +50,16 @@ function Contact() {
             reach out to us anytime for unparalleled service.
             <br /> Call us now!
           </p>
-          <li>+30 6900000000</li>
-          <li>24640 31000</li>
+          <div className="PhoneNumbers">
+            <span class="material-symbols-outlined" style={{ fontSize: "55px" }}>DeskPhone</span>
+            <li>+30 6900000000</li>
+            <li>24640 31000</li>
+          </div>
         </div>
         <div className="Location">
           <h1>You can find us here</h1>
           <p>
-            Located at 28 Octovriou in Servia, Kozani, finding our gym is a
+            Located at 28 Octovriou street in Servia, Kozani, finding our gym is a
             breeze. Our address is easily accessible, ensuring convenient
             navigation for all. Come visit us without any hassle and embark on
             your fitness journey with ease.
@@ -59,7 +68,7 @@ function Contact() {
             center={[40.1872, 22.0003]}
             zoom={14}
             scrollWheelZoom={false}
-            style={{ width: "100%", height: "300px", border: "1px solid grey" }}
+            style={{ width: "300px", height: "300px", border: "1px solid grey" }}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -78,11 +87,33 @@ function Contact() {
             stay updated with the latest news, promotions, and fitness
             inspiration. Join our vibrant online community today!
           </p>
-          <li>Facebook</li>
-          <li>Instagram</li>
+          <div className="SocialMediaIcons">
+            <a href="https://www.facebook.com/profile.php?id=100063588819880">
+              <FontAwesomeIcon id="facebook" icon={faFacebook} style={{ color: "blue", fontSize: "55px" }} />
+            </a>
+            <a href="https://www.instagram.com/oxygen.fitness_health_center/">
+              <FontAwesomeIcon id="instagram" icon={faInstagram} style={{
+                color: 'white',
+                fontSize: '55px',
+                backgroundImage: 'linear-gradient(to top, yellow, red)',
+                borderRadius: '25%',
+                padding: '3px',
+              }} />
+            </a>
+          </div>
         </div>
       </div>
-
+      <div className="EmailForm">
+        <h1>You may also contact us directly via email</h1>
+        <form type="submit">
+          <label>From</label>
+          <input type="email" placeholder="example@email.com"></input>
+          <label>To</label>
+          <input type="emai" placeholder="example@email.com"></input>
+          <input type="text"></input>
+          <button>Send</button>
+        </form>
+      </div>
       {/* {authUser ? ( */}
       {/* <div className="ContactContainer">
         <div className="ContactFormContainer">
