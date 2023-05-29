@@ -114,9 +114,7 @@ function DashBoard() {
             <>
               <div className="AnotherContainer">
                 <div className="PictureAndName">
-                  <div className="Picture">
-                    <img src={profilePic} alt="Profle pic"></img>
-                  </div>
+                  {/* <img src={profilePic} alt="Profle pic"></img> */}
                   <div className="Name">
                     Welcome to your profile, {formData.username}.
                   </div>
@@ -124,6 +122,7 @@ function DashBoard() {
                 <div className="DataContainer">
                   <div className="DataDisplay">
                     <div className="Info">
+                      <h1>Basic info</h1>
                       <label>Username:</label>
                       <input
                         type="text"
@@ -142,6 +141,13 @@ function DashBoard() {
                         disabled={true}
                         placeholder={formData.dob}
                       ></input>
+                      <h1>Means of contact</h1>
+                      <label>Email:</label>
+                      <input
+                        type="email"
+                        disabled={true}
+                        placeholder={authUser.email}
+                      ></input>
                     </div>
                     <div className="Link">
                       <Link
@@ -155,8 +161,28 @@ function DashBoard() {
                       <Outlet />
                     </div>
                   </div>
-                  <div className="QRcode">
-                    <QRCode value={qrCodeData} />
+                  <div className="RightContainer">
+                    <div className="ShopingCart">
+                      <h1>Your shopping cart</h1>
+                      <span
+                        class="material-symbols-outlined"
+                        style={{ fontSize: "55px" }}
+                      >
+                        Shop
+                      </span>
+                    </div>
+                    <div className="QRcode">
+                      <div className="QrSubContainer">
+                        <h1>Your unique QR code</h1>
+                        <span
+                          class="material-symbol-outlined"
+                          style={{ fontSize: "15px" }}
+                        >
+                          dld
+                        </span>
+                      </div>
+                      <QRCode value={qrCodeData} />
+                    </div>
                   </div>
                 </div>
               </div>

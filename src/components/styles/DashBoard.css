@@ -1,12 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Flow+Circular&family=Roboto+Condensed:wght@300&display=swap");
+
 .DashBoardContainer {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .FirstContainer {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -20,84 +25,62 @@
   padding-bottom: 4vmax;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(212, 212, 212);
+  gap: 2vh;
 }
 
 .NameContainer p {
   font-size: larger;
   border-bottom: solid thin;
-  box-shadow: 0px 10px 10px -10px;
 }
 
 .NameContainer button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: fit-content;
+  height: 100%;
 }
 
 .AnotherContainer {
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
   padding: 1vmax;
   gap: 5vmax;
   background-color: white;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 8px 8px -8px;
 }
 
 .DataContainer {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   height: fit-content;
+  width: 100%;
   gap: 10vmax;
   padding: 1vmax;
 }
 
 .PictureAndName {
   width: 100%;
-  height: max-content;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-}
-
-.Picture {
-  margin: 0;
-  padding: 0;
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  white-space: pre-wrap;
-}
-
-.Picture input {
-  display: flex;
-  width: fit-content;
-  height: fit-content;
-}
-
-.Picture img {
-  margin: 0;
-  padding: 0;
-  width: 100%;
   height: 100%;
   display: flex;
-  background-size: 3vmax;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-bottom: solid thin;
+}
+
+.PictureAndName img {
+  margin: 0;
+  padding: 0;
   aspect-ratio: 2/1;
-  background-color: transparent;
 }
 
 .Name {
-  width: fit-content;
-  font-size: 1.3rem;
+  font-size: 55px;
 }
 
 .DataDisplay {
@@ -108,8 +91,38 @@
   gap: 10vmax;
 }
 
+.RightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 5vh;
+}
+
+.ShopingCart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  border: solid thin;
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+}
+
+.ShopingCart:hover {
+  box-shadow: 0px 0px 10px 0px;
+  background-color: rgb(127, 255, 165);
+  transform: scale(1.01);
+
+  transition: all 0.1s ease-in-out;
+}
+
 .QRcode {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: fit-content;
   height: fit-content;
   justify-content: start;
@@ -117,6 +130,14 @@
   padding: 1vmax;
   border: solid thin;
   border-radius: 10px;
+}
+
+.QrSubContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .Info {
@@ -136,14 +157,11 @@
   background-color: transparent;
   border: none;
   border-bottom: solid thin;
-  border-left: solid thin;
+  /* border-left: solid thin; */
 }
 
 .Link {
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding-left: 3vmax;
-  font-size: 10px;
-  font-style: oblique;
+  justify-content: end;
+  font-size: 15px;
 }
