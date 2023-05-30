@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Flow+Circular&family=Roboto+Condensed:wght@300&display=swap");
+
+.OuterContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.Subscriptions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-family: "Bebas Neue", sans-serif;
+  gap: 30vh;
+}
+
+.Subscriptions h1 {
+  white-space: break-spaces;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 100;
+  width: 100%;
+}
+
+.Background {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(226, 226, 226);
+  width: 100%;
+  height: 70vh;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
+.Cards {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.Card {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: solid thin;
+    border-radius: 10px;
+    padding: 1vmax;
+    background-color: white;
+}

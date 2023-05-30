@@ -114,7 +114,24 @@
   box-shadow: 0px 0px 10px 0px;
   background-color: rgb(127, 255, 165);
   transform: scale(1.01);
+  transition: all 0.1s ease-in-out;
+}
 
+.Inbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  border: solid thin;
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+}
+
+.Inbox:hover {
+  box-shadow: 0px 0px 10px 0px;
+  background-color: rgb(127, 255, 165);
+  transform: scale(1.01);
   transition: all 0.1s ease-in-out;
 }
 

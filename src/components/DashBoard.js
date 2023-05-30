@@ -171,6 +171,15 @@ function DashBoard() {
                         Shop
                       </span>
                     </div>
+                    <div className="Inbox">
+                      <h1>Check your Inbox</h1>
+                      <span
+                        class="material-symbols-outlined"
+                        style={{ fontSize: "55px" }}
+                      >
+                        Inbox
+                      </span>
+                    </div>
                     <div className="QRcode">
                       <div className="QrSubContainer">
                         <h1>Your unique QR code</h1>
