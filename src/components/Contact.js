@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import "../components/styles/Contact.css";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import img2 from "../assets/images/img2.jpg";
 import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
   TileLayer,
-  useMap,
-  style,
   Marker,
   Popup,
 } from "react-leaflet";
@@ -18,22 +14,18 @@ import "material-symbols";
 
 function Contact() {
   const [authUser, setAuthUser] = useState(null);
-  const history = useNavigate();
-  let location = useLocation();
 
-  // useEffect(() => {
-  //   const listen = onAuthStateChanged(getAuth(), (user) => {
-  //     if (user) {
-  //       setAuthUser(user);
-  //       const userEmail = user.email;
-  //       history("/Contact");
-  //     } else {
-  //       setAuthUser(null);
-  //       history("/Contact/LoginPage");
-  //     }
-  //   });
-  //   return () => listen();
-  // }, []);
+  useEffect(() => {
+    const listen = onAuthStateChanged(getAuth(), (user) => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+    return () => listen();
+  }, []);
+
 
   return (
     <div className="ContactContainer">
@@ -117,35 +109,23 @@ function Contact() {
           </div>
         </div>
       </div>
-      <div className="EmailForm">
-        <h1>You may also contact us directly via email</h1>
-        <form id="formEmail" type="submit">
-          <label>From</label>
-          <input type="email" placeholder="example@email.com"></input>
-          <label>To</label>
-          <input type="emai" placeholder="example@email.com"></input>
-          <input type="text" placeholder="Write something..."></input>
-          <button>Send</button>
-        </form>
-      </div>
-      {/* {authUser ? ( */}
-      {/* <div className="ContactContainer">
-        <div className="ContactFormContainer">
-          <form type="submit">
-            <h2>You may also contact us directly via email.</h2>
-            <label>From:</label>
-            <input type="email" placeholder="example@email.com"></input>
-            <label>To:</label>
-            <input type="email" placeholder="example@email.com"></input>
+      {authUser ? (
+        <div className="EmailForm" >
+          <h1>You may also contact us directly via email</h1>
+          <form id="formEmail" type="submit">
+            <label>From you.</label>
+            <input type="email" disabled={true} placeholder={authUser.email}></input>
+            <label>To us.</label>
+            <input type="email" disabled={true} placeholder="thanaseskouts@gmail.com"></input>
+            <label>Subject.</label>
             <input type="text" placeholder="Write something..."></input>
+            <textarea type="text" placeholder="Write something..."></textarea>
             <button>Send</button>
           </form>
-          <Outlet />
         </div>
-      </div> */}
-      {/* ) : (
-        <div>nigga</div>
-      )} */}
+      ) : (
+        <div>empty</div>
+      )}
     </div>
   );
 }
