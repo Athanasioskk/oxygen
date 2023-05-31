@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import "../components/styles/Contact.css";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "leaflet/dist/leaflet.css";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import "material-symbols";
@@ -25,7 +20,6 @@ function Contact() {
     });
     return () => listen();
   }, []);
-
 
   return (
     <div className="ContactContainer">
@@ -100,7 +94,9 @@ function Contact() {
                 style={{
                   color: "white",
                   fontSize: "55px",
-                  backgroundImage: "linear-gradient(to top, yellow, red)",
+                  background: "rgb(131,58,180)",
+                  background:
+                    "linear-gradient(225deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
                   borderRadius: "25%",
                   padding: "3px",
                 }}
@@ -110,13 +106,21 @@ function Contact() {
         </div>
       </div>
       {authUser ? (
-        <div className="EmailForm" >
+        <div className="EmailForm">
           <h1>You may also contact us directly via email</h1>
           <form id="formEmail" type="submit">
             <label>From you.</label>
-            <input type="email" disabled={true} placeholder={authUser.email}></input>
+            <input
+              type="email"
+              disabled={true}
+              placeholder={authUser.email}
+            ></input>
             <label>To us.</label>
-            <input type="email" disabled={true} placeholder="thanaseskouts@gmail.com"></input>
+            <input
+              type="email"
+              disabled={true}
+              placeholder="thanaseskouts@gmail.com"
+            ></input>
             <label>Subject.</label>
             <input type="text" placeholder="Write something..."></input>
             <textarea type="text" placeholder="Write something..."></textarea>

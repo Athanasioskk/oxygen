@@ -7,6 +7,8 @@
   flex-direction: row;
   overflow: hidden;
   font-family: "Bebas Neue", sans-serif;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgb(147, 255, 188) 0%, white 30%);
 }
 
 .FirstContainer {
@@ -47,7 +49,6 @@
   height: 100%;
   padding: 1vmax;
   gap: 5vmax;
-  background-color: white;
   align-items: center;
   justify-content: center;
 }
