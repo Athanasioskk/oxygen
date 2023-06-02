@@ -181,7 +181,7 @@
 }
 
 .EmailForm button:hover {
-  background-color: rgb(191, 255, 215);
+  background-color: rgb(218, 253, 231);
 }
 
 #formEmail :nth-child(6) {
@@ -205,3 +205,5 @@
   min-width: 100%;
   min-height: 20vh;
 }
+
+

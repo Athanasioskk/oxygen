@@ -6,9 +6,12 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import "material-symbols";
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 function Contact() {
   const [authUser, setAuthUser] = useState(null);
+  const reciever_email = "thanaseskouts@gmail.com";
 
   useEffect(() => {
     const listen = onAuthStateChanged(getAuth(), (user) => {
@@ -20,6 +23,20 @@ function Contact() {
     });
     return () => listen();
   }, []);
+
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_durm7dd', 'template_w4llbpc', e.target, 'vhqos12VdotSNKN5q')
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+    e.target.reset();
+  };
 
   return (
     <div className="ContactContainer">
@@ -35,7 +52,7 @@ function Contact() {
           </p>
           <div className="PhoneNumbers">
             <span
-              class="material-symbols-outlined"
+              className="material-symbols-outlined"
               style={{ fontSize: "55px" }}
             >
               DeskPhone
@@ -106,28 +123,38 @@ function Contact() {
         </div>
       </div>
       {authUser ? (
-        <div className="EmailForm">
+        <div className="EmailForm" >
           <h1>You may also contact us directly via email</h1>
-          <form id="formEmail" type="submit">
-            <label>From you.</label>
+          <form ref={form} id="formEmail" onSubmit={sendEmail}>
+            <label>From you:</label>
             <input
               type="email"
               disabled={true}
               placeholder={authUser.email}
-            ></input>
-            <label>To us.</label>
+              name="user_email"
+              value={authUser.email}
+            />
+            <label>To us:</label>
             <input
               type="email"
               disabled={true}
-              placeholder="thanaseskouts@gmail.com"
-            ></input>
-            <label>Subject.</label>
-            <input type="text" placeholder="Write something..."></input>
-            <textarea type="text" placeholder="Write something..."></textarea>
-            <button>Send</button>
+              name="reciever_email"
+              placeholder={reciever_email}
+              value={reciever_email}
+            />
+            <label>Subject:</label>
+            <input
+              type="text"
+              name="subject"
+              placeholder="Write something..."
+            />
+            <textarea
+              name="message"
+              placeholder="Write something..."
+            ></textarea>
+            <button type="submit">Send</button>
           </form>
-        </div>
-      ) : (
+        </div>) : (
         <div>empty</div>
       )}
     </div>
