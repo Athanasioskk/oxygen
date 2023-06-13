@@ -1,10 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Flow+Circular&family=Roboto+Condensed:wght@300&display=swap");
+
 .Container {
   display: flex;
   flex-direction: row;
   width: 100%;
+  font-family: "Bebas Neue", sans-serif;
 }
 
-.LeftContainer {
+.LeftContainer2 {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -22,8 +25,10 @@
   height: 100%;
   position: sticky;
   top: calc(2vmax + 15px);
-  font-size: 13px;
-  max-height: 100vh; /* Set a maximum height for scrollability */
+  font-size: 20px;
+  max-height: calc(
+    100vh - 2vmax - 15px
+  ); /* Set a maximum height for scrollability */
   overflow-y: auto; /* Enable vertical scrolling */
   scrollbar-width: 100px;
   overflow-x: hidden;
@@ -41,13 +46,13 @@
   background-color: #999999; /* Set the color of the scrollbar thumb */
 }
 
-.LeftContainer ul {
+.LeftContainer2 ul {
   display: flex;
   flex-direction: column;
   align-items: start;
 }
 
-.LeftContainer h2 {
+.LeftContainer2 h2 {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -55,7 +60,7 @@
   font-size: 2.5vmax;
 }
 
-.RightContainer {
+.RightContainer2 {
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -110,7 +115,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-  scale: 1.2;
+  scale: 1.1;
   transition: opacity 0.25s, scale 0.35s;
   overflow: hidden;
   z-index: 1;

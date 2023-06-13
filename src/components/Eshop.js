@@ -4,11 +4,255 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import anabolic_whey_choco from "../assets/images/anabolic_whey_choco.webp";
 import beastpink from "../assets/images/beastpink.webp";
 import truewhey from "../assets/images/truewhey.webp";
+import creatineMonohydrate from "../assets/images/creatineMonohydrate.jpg";
+import bcaas from "../assets/images/bcaas.jpg";
+import maltodextrin from "../assets/images/maltodextrin.jpg";
+import betaAlanine from "../assets/images/bcaas.jpg";
+import moxy from "../assets/images/moxy.webp";
+import multiVitamin from "../assets/images/multiVitamin.png";
+import magnesiumShot from "../assets/images/magnesiumShot.png";
+import omega3s from "../assets/images/omega3s.png";
+import carnitine from "../assets/images/carnitine.png";
+import nightBurn from "../assets/images/nightBurn.png";
+import peanutButter from "../assets/images/peanutButter.webp";
+import praline from "../assets/images/praline.png";
+import proteinWaffles from "../assets/images/proteinWaffles.png";
 
 function Eshop() {
+
+  const protein = [
+    {
+      label: "Anabolic Whey",
+      img: anabolic_whey_choco,
+    },
+    {
+      label: "True Whey",
+      img: truewhey,
+    },
+    {
+      label: "Beast Pink",
+      img: beastpink,
+    }
+  ];
+
+  const creatine = [
+    {
+      label: "Creatine Monohydrate",
+      img: creatineMonohydrate,
+    }
+  ];
+
+  const aminoAcids = [
+    {
+      label: "BCAAs",
+      img: bcaas,
+    }
+  ];
+
+  const preWorkouts = [
+    {
+      label: "Maltodextrine",
+      img: maltodextrin,
+    },
+    {
+      label: "Beta Alanine",
+      img: betaAlanine,
+    },
+    {
+      label: "MOXY Energy Drink",
+      img: moxy,
+    },
+  ];
+
+  const vitamins = [
+    {
+      label: "Multi Vitamin",
+      img: multiVitamin,
+    }
+  ];
+
+  const other = [
+    {
+      label: "Magnesium Shots",
+      img: magnesiumShot,
+    },
+    {
+      label: "Omega-3s",
+      img: omega3s,
+    },
+    {
+      label: "Carnitine",
+      img: carnitine,
+    },
+    {
+      label: "Night BURN",
+      img: nightBurn,
+    }
+  ];
+
+  const snacks = [
+    {
+      label: "Peanut Butter",
+      img: peanutButter,
+    },
+    {
+      label: "Praline",
+      img: praline,
+    },
+    {
+      label: "Protein Waffle",
+      img: proteinWaffles,
+    }
+  ];
+
+
+
+  const Proteins = () => {
+    return (
+      <>
+        {protein.map((protein, index) => {
+          return (
+            <div className="ProductCard" id="AnabolicWheyChoco">
+              <label>{protein.label}</label>
+              <img
+                src={protein.img}
+                alt="..."
+                className="CardImage"
+              ></img>
+              <span className="Click">Go to description</span>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
+
+  const Creatines = () => {
+    return (
+      <>
+        {creatine.map((creatine, index) => {
+          return (
+            <div className="ProductCard" id="AnabolicWheyChoco">
+              <label>{creatine.label}</label>
+              <img
+                src={creatine.img}
+                alt="..."
+                className="CardImage"
+              ></img>
+              <span className="Click">Go to description</span>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
+
+  const AminoAcids = () => {
+    return (
+      <>
+        {aminoAcids.map((aminoAcids, index) => {
+          return (
+            <div className="ProductCard" id="AnabolicWheyChoco">
+              <label>{aminoAcids.label}</label>
+              <img
+                src={aminoAcids.img}
+                alt="..."
+                className="CardImage"
+              ></img>
+              <span className="Click">Go to description</span>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
+
+  const PreWorkouts = () => {
+    return (
+      <>
+        {preWorkouts.map((preWorkouts, index) => {
+          return (
+            <div className="ProductCard" id="AnabolicWheyChoco">
+              <label>{preWorkouts.label}</label>
+              <img
+                src={preWorkouts.img}
+                alt="..."
+                className="CardImage"
+              ></img>
+              <span className="Click">Go to description</span>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
+
+  const Vitamins = () => {
+    return (
+      <>
+        {vitamins.map((vitamins, index) => {
+          return (
+            <div className="ProductCard" id="AnabolicWheyChoco">
+              <label>{vitamins.label}</label>
+              <img
+                src={vitamins.img}
+                alt="..."
+                className="CardImage"
+              ></img>
+              <span className="Click">Go to description</span>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
+
+  const Other = () => {
+    return (
+      <>
+        {other.map((other, index) => {
+          return (
+            <div className="ProductCard" id="AnabolicWheyChoco">
+              <label>{other.label}</label>
+              <img
+                src={other.img}
+                alt="..."
+                className="CardImage"
+              ></img>
+              <span className="Click">Go to description</span>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
+
+  const Snacks = () => {
+    return (
+      <>
+        {snacks.map((snacks, index) => {
+          return (
+            <div className="ProductCard" id="AnabolicWheyChoco">
+              <label>{snacks.label}</label>
+              <img
+                src={snacks.img}
+                alt="..."
+                className="CardImage"
+              ></img>
+              <span className="Click">Go to description</span>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
+
+
+
+
   return (
     <div className="Container">
-      <div className="LeftContainer">
+      <div className="LeftContainer2">
         <div className="Menu">
           <h2>Menu</h2>
           <ul>
@@ -48,103 +292,47 @@ function Eshop() {
           </ul>
         </div>
       </div>
-      <div className="RightContainer">
+      <div className="RightContainer2">
         <div className="Categories" tabindex="-1" id="Protein">
           <h1>Protein</h1>
           <div className="Cards">
-            <div className="ProductCard" id="AnabolicWheyChoco">
-              <label>Anabolic Whey</label>
-              <img
-                src={anabolic_whey_choco}
-                alt="..."
-                className="CardImage"
-              ></img>
-              <span className="Click">Go to description</span>
-            </div>
-            <div className="ProductCard">
-              <label>True Whey</label>
-              <img src={truewhey} alt="..." className="CardImage"></img>
-              <span className="Click">Go to description</span>
-            </div>
-            <div className="ProductCard">
-              <label>Beast Pink</label>
-              <img src={beastpink} alt="..." className="CardImage"></img>
-              <span className="Click">Go to description</span>
-            </div>
+            <Proteins />
           </div>
         </div>
         <div className="Categories" tabindex="-1" id="Creatine">
           <h1>Creatine</h1>
           <div className="Cards">
-            <div className="ProductCard">
-              <label>Creatine Monohydrate</label>
-              <p>small description of product</p>
-            </div>
+            <Creatines />
           </div>
         </div>
         <div className="Categories" tabindex="-1" id="AminoAcids">
           <h1>Amino Acids</h1>
           <div className="Cards">
-            <div className="ProductCard">
-              <label>BCAAs</label>
-              <p>small description of product</p>
-            </div>
+            <AminoAcids />
           </div>
         </div>
         <div className="Categories" tabindex="-1" id="Pre">
           <h1>Pre-workouts</h1>
           <div className="Cards">
-            <div className="ProductCard">
-              <label>Maltodextrine</label>
-              <p>small description of product</p>
-            </div>
-            <div className="ProductCard">
-              <label>Beta Alanine</label>
-              <p>small description of product</p>
-            </div>
-            <div className="ProductCard">
-              <label>MOXY Energy Drink</label>
-              <p>small description of product</p>
-            </div>
+            <PreWorkouts />
           </div>
         </div>
         <div className="Categories" tabindex="-1" id="Vitamins">
           <h1>Vitamins</h1>
           <div className="Cards">
-            <div className="ProductCard">
-              <label>Multi Vitamin</label>
-              <p>small description of product</p>
-            </div>
+            <Vitamins />
           </div>
         </div>
         <div className="Categories" tabindex="-1" id="Other">
           <h1>Other Supplements</h1>
           <div className="Cards">
-            <div className="ProductCard">
-              <label>Magnesium Shots</label>
-              <p>small description of product</p>
-            </div>
-            <div className="ProductCard">
-              <label>Omega-3s</label>
-              <p>small description of product</p>
-            </div>
+            <Other />
           </div>
         </div>
         <div className="Categories" tabindex="-1" id="Snacks">
           <h1>Healthy Snacks & Foods</h1>
           <div className="Cards">
-            <div className="ProductCard">
-              <label>Peanut Butter</label>
-              <p>small description of product</p>
-            </div>
-            <div className="ProductCard">
-              <label>Praline</label>
-              <p>small description of product</p>
-            </div>
-            <div className="ProductCard">
-              <label>Protein Waffles</label>
-              <p>small description of product</p>
-            </div>
+            <Snacks />
           </div>
         </div>
       </div>
