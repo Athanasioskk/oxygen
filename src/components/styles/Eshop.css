@@ -19,12 +19,14 @@
   align-items: start;
   justify-content: flex-start;
   width: 100%;
+  height: 100%;
   position: sticky;
-  top: 5%;
-  font-size: 0.9vmax;
-  max-height: calc(110vh - 5%); /* Set a maximum height for scrollability */
+  top: calc(2vmax + 15px);
+  font-size: 13px;
+  max-height: 100vh; /* Set a maximum height for scrollability */
   overflow-y: auto; /* Enable vertical scrolling */
   scrollbar-width: 100px;
+  overflow-x: hidden;
 }
 
 .Menu::-webkit-scrollbar {
@@ -89,7 +91,7 @@
 
 .ProductCard {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: space-between;
   padding: 1vmax;
@@ -101,5 +103,47 @@
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: rgb(200, 255, 237);
+  overflow: hidden;
+}
+
+.CardImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  scale: 1.2;
+  transition: opacity 0.25s, scale 0.35s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ProductCard:hover .CardImage {
+  scale: 1;
+}
+
+.ProductCard label {
+  font-weight: bolder;
+  font-size: 20px;
+  z-index: 99;
+}
+
+.Click {
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  opacity: 0;
+  transform: translateY(-25px);
+  /* Position the tooltip */
+  position: relative;
+  z-index: 100;
+  transition-delay: 0.3s;
+  transition: all 0.25s;
+}
+
+.ProductCard:hover .Click {
+  opacity: 1;
+  transform: translateY(0);
 }
