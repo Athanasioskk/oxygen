@@ -1,5 +1,5 @@
 import Home from "../components/Home.js";
-import QandA from "./QandA.js";
+import Eshop from "./Eshop.js";
 import Programs from "../components/Programs.js";
 import Subscriptions from "../components/Subscriptions.js";
 import Contact from "../components/Contact.js";
@@ -19,7 +19,7 @@ function OwnRoutes() {
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/QandA" element={<QandA />} />
+        <Route path="/Supplements" element={<Eshop />} />
         <Route path="/Programs" element={<Programs />} />
         <Route path="/Subscriptions" element={<Subscriptions />} />
         {/* <Route path="/Contact" element={<Contact />} /> */}

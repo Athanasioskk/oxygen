@@ -126,7 +126,7 @@ function Contact() {
         <div className="EmailForm" >
           <h1>You may also contact us directly via email</h1>
           <form ref={form} id="formEmail" onSubmit={sendEmail}>
-            <label>From you:</label>
+            <label>From you.</label>
             <input
               type="email"
               disabled={true}
@@ -134,7 +134,7 @@ function Contact() {
               name="user_email"
               value={authUser.email}
             />
-            <label>To us:</label>
+            <label>To us.</label>
             <input
               type="email"
               disabled={true}
@@ -142,7 +142,7 @@ function Contact() {
               placeholder={reciever_email}
               value={reciever_email}
             />
-            <label>Subject:</label>
+            <label>Subject.</label>
             <input
               type="text"
               name="subject"
@@ -155,8 +155,38 @@ function Contact() {
             <button type="submit">Send</button>
           </form>
         </div>) : (
-        <div>empty</div>
-      )}
+        <div className="EmailForm" >
+          <h1>You may also contact us directly via email</h1>
+          <form ref={form} id="formEmail" onSubmit={sendEmail}>
+            <label>From you.</label>
+            <input
+              type="email"
+              disabled={false}
+              placeholder="example@email.com"
+              name="user_email"
+              required
+            />
+            <label>To us.</label>
+            <input
+              type="email"
+              disabled={true}
+              name="reciever_email"
+              placeholder={reciever_email}
+              value={reciever_email}
+            />
+            <label>Subject.</label>
+            <input
+              type="text"
+              name="subject"
+              placeholder="Write something..."
+            />
+            <textarea
+              name="message"
+              placeholder="Write something..."
+            ></textarea>
+            <button type="submit">Send</button>
+          </form>
+        </div>)}
     </div>
   );
 }

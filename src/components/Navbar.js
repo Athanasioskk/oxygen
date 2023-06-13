@@ -14,8 +14,8 @@ function Navbar() {
             id: 1,
         },
         {
-            title: 'QandA',
-            route: 'QandA',
+            title: 'Supplements',
+            route: 'Supplements',
             id: 2,
         },
         {

@@ -1,0 +1,105 @@
+.Container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.LeftContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  width: 20%;
+  background-color: rgb(240, 240, 240);
+}
+
+.Menu {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  width: 100%;
+  position: sticky;
+  top: 5%;
+  font-size: 0.9vmax;
+  max-height: calc(110vh - 5%); /* Set a maximum height for scrollability */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: 100px;
+}
+
+.Menu::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+.Menu::-webkit-scrollbar-track {
+  background-color: #dddddd; /* Set the background color of the scrollbar track */
+}
+
+.Menu::-webkit-scrollbar-thumb {
+  background-color: #999999; /* Set the color of the scrollbar thumb */
+}
+
+.LeftContainer ul {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.LeftContainer h2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  font-size: 2.5vmax;
+}
+
+.RightContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  padding-left: 1vmax;
+  overflow: hidden;
+  margin-top: 2vmax;
+  margin-bottom: 2vmax;
+}
+
+.Categories {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+}
+
+.Categories h1 {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  border-bottom: 1px solid black;
+  font-size: 2.5vmax;
+}
+
+.Cards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start !important;
+  gap: 1vmax;
+}
+
+.ProductCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1vmax;
+  border: solid thin;
+  width: fit-content;
+  height: 250px;
+  width: 200px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: rgb(200, 255, 237);
+}
