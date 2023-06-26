@@ -17,8 +17,8 @@ function Subscriptions() {
           subscription plans cater to your needs without breaking the bank.
         </p>
         <div className="Background">
-          <div className="Cards">
-            <div className="Card" id="first">
+          <div className="Cards2">
+            <div className="Card2" id="first">
               <h2>30 euros</h2>
               {/* <span
                 class="material-symbols-outlined"
@@ -29,12 +29,12 @@ function Subscriptions() {
               <label>30 day plan</label>
               <button>GET STARTED</button>
             </div>
-            <div className="Card" id="second">
+            <div className="Card2" id="second">
               <h2>90 euros</h2>
               <label>6 month plan</label>
               <button>GET STARTED</button>
             </div>
-            <div className="Card" id="third">
+            <div className="Card2" id="third">
               <h2>240 euros</h2>
               <label>12 month plan</label>
               <button>GET STARTED</button>

@@ -1,142 +1,209 @@
 import "./styles/Eshop.css";
 import React, { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import anabolic_whey_choco from "../assets/images/anabolic_whey_choco.webp";
-import beastpink from "../assets/images/beastpink.webp";
-import truewhey from "../assets/images/truewhey.webp";
-import creatineMonohydrate from "../assets/images/creatineMonohydrate.jpg";
-import bcaas from "../assets/images/bcaas.jpg";
-import maltodextrin from "../assets/images/maltodextrin.jpg";
-import betaAlanine from "../assets/images/bcaas.jpg";
-import moxy from "../assets/images/moxy.webp";
-import multiVitamin from "../assets/images/multiVitamin.png";
-import magnesiumShot from "../assets/images/magnesiumShot.png";
-import omega3s from "../assets/images/omega3s.png";
-import carnitine from "../assets/images/carnitine.png";
-import nightBurn from "../assets/images/nightBurn.png";
-import peanutButter from "../assets/images/peanutButter.webp";
-import praline from "../assets/images/praline.png";
-import proteinWaffles from "../assets/images/proteinWaffles.png";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
 
 function Eshop() {
 
-  const protein = [
+  const [creatineData, setCreatineData] = useState([
     {
-      label: "Anabolic Whey",
-      img: anabolic_whey_choco,
-    },
-    {
-      label: "True Whey",
-      img: truewhey,
-    },
-    {
-      label: "Beast Pink",
-      img: beastpink,
+      label: "",
+      img: "",
     }
-  ];
+  ]);
 
-  const creatine = [
+  const [aminoAcidsData, setAminoAcidsData] = useState([
     {
-      label: "Creatine Monohydrate",
-      img: creatineMonohydrate,
+      label: "",
+      img: "",
     }
-  ];
+  ]);
 
-  const aminoAcids = [
+  const [preWorkoutsData, setPreWorkoutsData] = useState([
     {
-      label: "BCAAs",
-      img: bcaas,
+      label: "",
+      img: "",
+    },
+    {
+      label: "",
+      img: "",
+    },
+    {
+      label: "",
+      img: "",
+    },
+  ]);
+
+  const [vitaminsData, setVitaminsData] = useState([
+    {
+      label: "",
+      img: "",
     }
-  ];
+  ]);
 
-  const preWorkouts = [
+  const [otherData, setOtherData] = useState([
     {
-      label: "Maltodextrine",
-      img: maltodextrin,
+      label: "",
+      img: "",
     },
     {
-      label: "Beta Alanine",
-      img: betaAlanine,
+      label: "",
+      img: "",
     },
     {
-      label: "MOXY Energy Drink",
-      img: moxy,
+      label: "",
+      img: "",
     },
-  ];
-
-  const vitamins = [
     {
-      label: "Multi Vitamin",
-      img: multiVitamin,
+      label: "",
+      img: "",
     }
-  ];
+  ]);
 
-  const other = [
+  const [snacksData, setSnacksData] = useState([
     {
-      label: "Magnesium Shots",
-      img: magnesiumShot,
+      label: "",
+      img: "",
     },
     {
-      label: "Omega-3s",
-      img: omega3s,
+      label: "",
+      img: "",
     },
     {
-      label: "Carnitine",
-      img: carnitine,
-    },
-    {
-      label: "Night BURN",
-      img: nightBurn,
+      label: "",
+      img: "",
     }
-  ];
+  ]);
 
-  const snacks = [
+
+  const [proteinData, setProteinData] = useState([
     {
-      label: "Peanut Butter",
-      img: peanutButter,
+      label: "",
+      img: "",
     },
     {
-      label: "Praline",
-      img: praline,
+      label: "",
+      img: "",
     },
     {
-      label: "Protein Waffle",
-      img: proteinWaffles,
+      label: "",
+      img: "",
     }
-  ];
+  ]);
+
+  async function fetchData() {
+    const docRef = doc(db, "products", "P2VKQYB2z6YIM2khjaWN");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setProteinData(docSnap.data().protein);
+      setCreatineData(docSnap.data().creatine);
+      setAminoAcidsData(docSnap.data().aminoAcids);
+      setOtherData(docSnap.data().other);
+      setVitaminsData(docSnap.data().vitamins);
+      setPreWorkoutsData(docSnap.data().preWorkouts);
+      setSnacksData(docSnap.data().snacks);
+    } else {
+      setProteinData([{
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      }]);
+      setCreatineData([{
+        label: "",
+        img: "",
+      }]);
+      setOtherData([{
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      }]);
+      setAminoAcidsData([{
+        label: "",
+        img: "",
+      }]);
+      setVitaminsData([{
+        label: "",
+        img: "",
+      }]);
+      setPreWorkoutsData([{
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      }]);
+      setSnacksData([{
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      },
+      {
+        label: "",
+        img: "",
+      }])
+    }
+  }
 
 
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const Proteins = () => {
     return (
       <>
-        {protein.map((protein, index) => {
-          return (
-            <div className="ProductCard" id="AnabolicWheyChoco">
-              <label>{protein.label}</label>
-              <img
-                src={protein.img}
-                alt="..."
-                className="CardImage"
-              ></img>
-              <span className="Click">Go to description</span>
-            </div>
-          )
-        })}
+        {proteinData.map((protein, index) => (
+          <div className="ProductCard" key={index}>
+            <label>{protein.label}</label>
+            <img
+              src={protein.img}
+              alt={protein.img}
+              className="CardImage">
+            </img>
+            <span className="Click">Go to description</span>
+          </div>
+        ))}
       </>
-    )
+    );
   }
 
   const Creatines = () => {
     return (
       <>
-        {creatine.map((creatine, index) => {
+        {creatineData.map((creatine, index) => {
           return (
-            <div className="ProductCard" id="AnabolicWheyChoco">
+            <div className="ProductCard" key={index}>
               <label>{creatine.label}</label>
               <img
                 src={creatine.img}
-                alt="..."
+                alt={creatine.img}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
@@ -150,13 +217,13 @@ function Eshop() {
   const AminoAcids = () => {
     return (
       <>
-        {aminoAcids.map((aminoAcids, index) => {
+        {aminoAcidsData.map((aminoAcids, index) => {
           return (
-            <div className="ProductCard" id="AnabolicWheyChoco">
+            <div className="ProductCard" key={index}>
               <label>{aminoAcids.label}</label>
               <img
                 src={aminoAcids.img}
-                alt="..."
+                alt={aminoAcids.img}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
@@ -170,13 +237,13 @@ function Eshop() {
   const PreWorkouts = () => {
     return (
       <>
-        {preWorkouts.map((preWorkouts, index) => {
+        {preWorkoutsData.map((preWorkouts, index) => {
           return (
-            <div className="ProductCard" id="AnabolicWheyChoco">
+            <div className="ProductCard" key={index}>
               <label>{preWorkouts.label}</label>
               <img
                 src={preWorkouts.img}
-                alt="..."
+                alt={preWorkouts.img}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
@@ -190,13 +257,13 @@ function Eshop() {
   const Vitamins = () => {
     return (
       <>
-        {vitamins.map((vitamins, index) => {
+        {vitaminsData.map((vitamins, index) => {
           return (
-            <div className="ProductCard" id="AnabolicWheyChoco">
+            <div className="ProductCard" key={index}>
               <label>{vitamins.label}</label>
               <img
                 src={vitamins.img}
-                alt="..."
+                alt={vitamins.img}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
@@ -210,13 +277,13 @@ function Eshop() {
   const Other = () => {
     return (
       <>
-        {other.map((other, index) => {
+        {otherData.map((other, index) => {
           return (
-            <div className="ProductCard" id="AnabolicWheyChoco">
+            <div className="ProductCard" key={index}>
               <label>{other.label}</label>
               <img
                 src={other.img}
-                alt="..."
+                alt={other.img}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
@@ -230,13 +297,13 @@ function Eshop() {
   const Snacks = () => {
     return (
       <>
-        {snacks.map((snacks, index) => {
+        {snacksData.map((snacks, index) => {
           return (
-            <div className="ProductCard" id="AnabolicWheyChoco">
+            <div className="ProductCard" key={index}>
               <label>{snacks.label}</label>
               <img
                 src={snacks.img}
-                alt="..."
+                alt={snacks.img}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
@@ -293,43 +360,43 @@ function Eshop() {
         </div>
       </div>
       <div className="RightContainer2">
-        <div className="Categories" tabindex="-1" id="Protein">
+        <div className="Categories" tabIndex="-1" id="Protein">
           <h1>Protein</h1>
           <div className="Cards">
             <Proteins />
           </div>
         </div>
-        <div className="Categories" tabindex="-1" id="Creatine">
+        <div className="Categories" tabIndex="-1" id="Creatine">
           <h1>Creatine</h1>
           <div className="Cards">
             <Creatines />
           </div>
         </div>
-        <div className="Categories" tabindex="-1" id="AminoAcids">
+        <div className="Categories" tabIndex="-1" id="AminoAcids">
           <h1>Amino Acids</h1>
           <div className="Cards">
             <AminoAcids />
           </div>
         </div>
-        <div className="Categories" tabindex="-1" id="Pre">
+        <div className="Categories" tabIndex="-1" id="Pre">
           <h1>Pre-workouts</h1>
           <div className="Cards">
             <PreWorkouts />
           </div>
         </div>
-        <div className="Categories" tabindex="-1" id="Vitamins">
+        <div className="Categories" tabIndex="-1" id="Vitamins">
           <h1>Vitamins</h1>
           <div className="Cards">
             <Vitamins />
           </div>
         </div>
-        <div className="Categories" tabindex="-1" id="Other">
+        <div className="Categories" tabIndex="-1" id="Other">
           <h1>Other Supplements</h1>
           <div className="Cards">
             <Other />
           </div>
         </div>
-        <div className="Categories" tabindex="-1" id="Snacks">
+        <div className="Categories" tabIndex="-1" id="Snacks">
           <h1>Healthy Snacks & Foods</h1>
           <div className="Cards">
             <Snacks />
