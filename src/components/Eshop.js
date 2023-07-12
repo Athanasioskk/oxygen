@@ -2,95 +2,47 @@ import "./styles/Eshop.css";
 import React, { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-
+import { storage } from "../firebase";
+import { getDownloadURL, ref, listAll } from "firebase/storage";
 
 function Eshop() {
+  const [creatineData, setCreatineData] = useState([]);
+  const [aminoAcidsData, setAminoAcidsData] = useState([]);
+  const [preWorkoutsData, setPreWorkoutsData] = useState([]);
+  const [vitaminsData, setVitaminsData] = useState([]);
+  const [otherData, setOtherData] = useState([]);
+  const [snacksData, setSnacksData] = useState([]);
+  const [proteinData, setProteinData] = useState([]);
+  const [proteinImages, setProteinImages] = useState(null);
 
-  const [creatineData, setCreatineData] = useState([
-    {
-      label: "",
-      img: "",
-    }
-  ]);
+  // getDownloadURL(proteinRef).then((url) => {
+  //   setProteinImages(url);
+  //   console.log(proteinImages);
+  // });
 
-  const [aminoAcidsData, setAminoAcidsData] = useState([
-    {
-      label: "",
-      img: "",
-    }
-  ]);
+  const [imageUrls, setImageUrls] = useState([]);
 
-  const [preWorkoutsData, setPreWorkoutsData] = useState([
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    },
-  ]);
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const imagesRef = ref(storage, "product_images/protein");
+        const imageList = await listAll(imagesRef);
 
-  const [vitaminsData, setVitaminsData] = useState([
-    {
-      label: "",
-      img: "",
-    }
-  ]);
+        const urls = await Promise.all(
+          imageList.items.map(async (imageRef) => {
+            const url = await getDownloadURL(imageRef);
+            return url;
+          })
+        );
 
-  const [otherData, setOtherData] = useState([
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    }
-  ]);
-
-  const [snacksData, setSnacksData] = useState([
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    }
-  ]);
-
-
-  const [proteinData, setProteinData] = useState([
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    },
-    {
-      label: "",
-      img: "",
-    }
-  ]);
+        setImageUrls(urls);
+        console.log(urls);
+      } catch (error) {
+        console.log("Error fetching images:", error);
+      }
+    };
+    fetchImages();
+  }, []);
 
   async function fetchData() {
     const docRef = doc(db, "products", "P2VKQYB2z6YIM2khjaWN");
@@ -103,74 +55,31 @@ function Eshop() {
       setVitaminsData(docSnap.data().vitamins);
       setPreWorkoutsData(docSnap.data().preWorkouts);
       setSnacksData(docSnap.data().snacks);
+
+      const fieldToUpdate = "img";
+
+      docRef
+        .doc("protein")
+        .update({
+          [fieldToUpdate]: imageUrls,
+        })
+        .then(() => {
+          console.log("Document updated successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating document:", error);
+        });
+      // setProteinData((previousState) => [...previousState, { img: imageUrls }]);
     } else {
-      setProteinData([{
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      }]);
-      setCreatineData([{
-        label: "",
-        img: "",
-      }]);
-      setOtherData([{
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      }]);
-      setAminoAcidsData([{
-        label: "",
-        img: "",
-      }]);
-      setVitaminsData([{
-        label: "",
-        img: "",
-      }]);
-      setPreWorkoutsData([{
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      }]);
-      setSnacksData([{
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      },
-      {
-        label: "",
-        img: "",
-      }])
+      setProteinData([]);
+      setCreatineData([]);
+      setOtherData([]);
+      setAminoAcidsData([]);
+      setVitaminsData([]);
+      setPreWorkoutsData([]);
+      setSnacksData([]);
     }
   }
-
 
   useEffect(() => {
     fetchData();
@@ -184,15 +93,17 @@ function Eshop() {
             <label>{protein.label}</label>
             <img
               src={protein.img}
-              alt={protein.img}
-              className="CardImage">
-            </img>
+              alt={protein.label}
+              className="CardImage"
+              id="protimg"
+            ></img>
+            {/* <Proteinimages /> */}
             <span className="Click">Go to description</span>
           </div>
         ))}
       </>
     );
-  }
+  };
 
   const Creatines = () => {
     return (
@@ -203,16 +114,16 @@ function Eshop() {
               <label>{creatine.label}</label>
               <img
                 src={creatine.img}
-                alt={creatine.img}
+                alt={creatine.label}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
             </div>
-          )
+          );
         })}
       </>
-    )
-  }
+    );
+  };
 
   const AminoAcids = () => {
     return (
@@ -223,16 +134,16 @@ function Eshop() {
               <label>{aminoAcids.label}</label>
               <img
                 src={aminoAcids.img}
-                alt={aminoAcids.img}
+                alt={aminoAcids.label}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
             </div>
-          )
+          );
         })}
       </>
-    )
-  }
+    );
+  };
 
   const PreWorkouts = () => {
     return (
@@ -243,16 +154,16 @@ function Eshop() {
               <label>{preWorkouts.label}</label>
               <img
                 src={preWorkouts.img}
-                alt={preWorkouts.img}
+                alt={preWorkouts.label}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
             </div>
-          )
+          );
         })}
       </>
-    )
-  }
+    );
+  };
 
   const Vitamins = () => {
     return (
@@ -263,16 +174,16 @@ function Eshop() {
               <label>{vitamins.label}</label>
               <img
                 src={vitamins.img}
-                alt={vitamins.img}
+                alt={vitamins.label}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
             </div>
-          )
+          );
         })}
       </>
-    )
-  }
+    );
+  };
 
   const Other = () => {
     return (
@@ -283,16 +194,16 @@ function Eshop() {
               <label>{other.label}</label>
               <img
                 src={other.img}
-                alt={other.img}
+                alt={other.label}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
             </div>
-          )
+          );
         })}
       </>
-    )
-  }
+    );
+  };
 
   const Snacks = () => {
     return (
@@ -303,19 +214,16 @@ function Eshop() {
               <label>{snacks.label}</label>
               <img
                 src={snacks.img}
-                alt={snacks.img}
+                alt={snacks.label}
                 className="CardImage"
               ></img>
               <span className="Click">Go to description</span>
             </div>
-          )
+          );
         })}
       </>
-    )
-  }
-
-
-
+    );
+  };
 
   return (
     <div className="Container">

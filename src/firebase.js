@@ -11,7 +11,6 @@ const firebaseConfig = {
   messagingSenderId: "763154138510",
   appId: "1:763154138510:web:a56b9842650c4b662390df",
   measurementId: "G-6TRKTB38JH",
-  storageBucket: "gs://oxygen-gym-11db7.appspot.com",
 };
 
 const app = initializeApp(firebaseConfig);

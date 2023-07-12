@@ -10,8 +10,8 @@
 .LeftContainer2 {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: flex-flex-start;
   width: 20%;
   background-color: rgb(240, 240, 240);
 }
@@ -19,8 +19,8 @@
 .Menu {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: flex-flex-start;
   width: 100%;
   height: 100%;
   position: sticky;
@@ -49,7 +49,7 @@
 .LeftContainer2 ul {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .LeftContainer2 h2 {
@@ -80,7 +80,7 @@
 .Categories h1 {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   border-bottom: 1px solid black;
   font-size: 2.5vmax;
 }

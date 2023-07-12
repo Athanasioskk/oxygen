@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .ContactInfo p {
@@ -38,7 +38,7 @@
   height: 100%;
   width: 100%;
   background-color: transparent;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   transition: all ease-out 0.6s;
   font-family: "Bebas Neue", sans-serif;
@@ -61,7 +61,7 @@
   height: 100%;
   width: 100%;
   background-color: transparent;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   transition: all ease-out 0.6s;
   font-family: "Bebas Neue", sans-serif;
@@ -75,7 +75,7 @@
   height: 100%;
   width: 100%;
   background-color: transparent;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   transition: all ease-out 0.6s;
   font-family: "Bebas Neue", sans-serif;
@@ -180,7 +180,7 @@
 }
 
 #formEmail :nth-child(6) {
-  text-align: start;
+  text-align: flex-start;
   text-overflow: clip;
   font-family: Arial, Helvetica, sans-serif;
   font-size: large;
