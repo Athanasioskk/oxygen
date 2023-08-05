@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { storage } from "../firebase";
-import { getDownloadURL, ref, listAll } from "firebase/storage";
+import { getDownloadURL, ref, listAll, getStorage } from "firebase/storage";
 
 function Eshop() {
   const [creatineData, setCreatineData] = useState([]);
@@ -13,19 +13,21 @@ function Eshop() {
   const [otherData, setOtherData] = useState([]);
   const [snacksData, setSnacksData] = useState([]);
   const [proteinData, setProteinData] = useState([]);
-  const [proteinImages, setProteinImages] = useState(null);
 
-  // getDownloadURL(proteinRef).then((url) => {
-  //   setProteinImages(url);
-  //   console.log(proteinImages);
-  // });
+  const [proteinUrls, setProteinUrls] = useState("");
+  const [creatineUrls, setCreatineUrls] = useState("");
+  const [aminoAcidsUrls, setAminoAcidsUrls] = useState("");
+  const [vitaminsUrls, setVitaminsUrls] = useState("");
+  const [otherUrls, setOtherUrls] = useState("");
+  const [snacksUrls, setSnacksUrls] = useState("");
+  const [preWorkoutsUrls, setPreWorkoutsUrls] = useState("");
 
-  const [imageUrls, setImageUrls] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchImages = async (Name, stateSetter) => {
       try {
-        const imagesRef = ref(storage, "product_images/protein");
+        const imagesRef = ref(storage, `product_images/${Name}`);
         const imageList = await listAll(imagesRef);
 
         const urls = await Promise.all(
@@ -35,53 +37,99 @@ function Eshop() {
           })
         );
 
-        setImageUrls(urls);
-        console.log(urls);
+        const mappedUrls = urls.map((url) => ({ img: url }));
+        stateSetter(mappedUrls);
       } catch (error) {
-        console.log("Error fetching images:", error);
+        console.log(`Error fetching ${Name} images:`, error);
       }
     };
-    fetchImages();
+
+    // Fetch images for each category
+    fetchImages("protein", setProteinUrls);
+    fetchImages("creatine", setCreatineUrls);
+    fetchImages("aminoacids", setAminoAcidsUrls);
+    fetchImages("vitamins", setVitaminsUrls);
+    fetchImages("other", setOtherUrls);
+    fetchImages("snacks", setSnacksUrls);
+    fetchImages("preworkout", setPreWorkoutsUrls);
+
+    setLoading(false);
   }, []);
 
-  async function fetchData() {
-    const docRef = doc(db, "products", "P2VKQYB2z6YIM2khjaWN");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setProteinData(docSnap.data().protein);
-      setCreatineData(docSnap.data().creatine);
-      setAminoAcidsData(docSnap.data().aminoAcids);
-      setOtherData(docSnap.data().other);
-      setVitaminsData(docSnap.data().vitamins);
-      setPreWorkoutsData(docSnap.data().preWorkouts);
-      setSnacksData(docSnap.data().snacks);
-
-      const fieldToUpdate = "img";
-
-      docRef
-        .doc("protein")
-        .update({
-          [fieldToUpdate]: imageUrls,
-        })
-        .then(() => {
-          console.log("Document updated successfully!");
-        })
-        .catch((error) => {
-          console.error("Error updating document:", error);
-        });
-      // setProteinData((previousState) => [...previousState, { img: imageUrls }]);
-    } else {
-      setProteinData([]);
-      setCreatineData([]);
-      setOtherData([]);
-      setAminoAcidsData([]);
-      setVitaminsData([]);
-      setPreWorkoutsData([]);
-      setSnacksData([]);
-    }
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      const docRef = doc(db, "products", "P2VKQYB2z6YIM2khjaWN");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const updatedProteinData = docSnap.data().protein.map((item, index) => {
+          return {
+            ...item,
+            img: proteinUrls[index]?.img,
+          };
+        });
+        const updatedCreatineData = docSnap
+          .data()
+          .creatine.map((item, index) => {
+            return {
+              ...item,
+              img: creatineUrls[index]?.img,
+            };
+          });
+        const updatedAminoAcidsData = docSnap
+          .data()
+          .aminoAcids.map((item, index) => {
+            return {
+              ...item,
+              img: aminoAcidsUrls[index]?.img,
+            };
+          });
+        const updatedVitaminsData = docSnap
+          .data()
+          .vitamins.map((item, index) => {
+            return {
+              ...item,
+              img: vitaminsUrls[index]?.img,
+            };
+          });
+        const updatedOtherData = docSnap.data().other.map((item, index) => {
+          return {
+            ...item,
+            img: otherUrls[index]?.img,
+          };
+        });
+        const updatedSnacksData = docSnap.data().snacks.map((item, index) => {
+          return {
+            ...item,
+            img: snacksUrls[index]?.img,
+          };
+        });
+        const updatedPreWorkoutsData = docSnap
+          .data()
+          .preWorkouts.map((item, index) => {
+            return {
+              ...item,
+              img: preWorkoutsUrls[index]?.img,
+            };
+          });
+        setProteinData(updatedProteinData);
+        setCreatineData(updatedCreatineData);
+        setAminoAcidsData(updatedAminoAcidsData);
+        setOtherData(updatedOtherData);
+        setVitaminsData(updatedVitaminsData);
+        setPreWorkoutsData(updatedPreWorkoutsData);
+        setSnacksData(updatedSnacksData);
+
+        console.log(preWorkoutsData);
+      } else {
+        setProteinData([]);
+        setCreatineData([]);
+        setOtherData([]);
+        setAminoAcidsData([]);
+        setVitaminsData([]);
+        setPreWorkoutsData([]);
+        setSnacksData([]);
+      }
+    }
     fetchData();
   }, []);
 
@@ -95,9 +143,7 @@ function Eshop() {
               src={protein.img}
               alt={protein.label}
               className="CardImage"
-              id="protimg"
             ></img>
-            {/* <Proteinimages /> */}
             <span className="Click">Go to description</span>
           </div>
         ))}
@@ -227,6 +273,7 @@ function Eshop() {
 
   return (
     <div className="Container">
+      {loading ? <div>Loading...</div> : null}
       <div className="LeftContainer2">
         <div className="Menu">
           <h2>Menu</h2>
