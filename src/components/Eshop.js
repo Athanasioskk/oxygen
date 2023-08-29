@@ -2,7 +2,7 @@ import "./styles/Eshop.css";
 import React, { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { storage } from "../firebase";
+import { Link } from "react-router-dom";
 import { getDownloadURL, ref, listAll, getStorage } from "firebase/storage";
 
 function Eshop() {
@@ -13,14 +13,6 @@ function Eshop() {
   const [otherData, setOtherData] = useState([]);
   const [snacksData, setSnacksData] = useState([]);
   const [proteinData, setProteinData] = useState([]);
-
-  // const [proteinUrls, setProteinUrls] = useState("");
-  // const [creatineUrls, setCreatineUrls] = useState("");
-  // const [aminoAcidsUrls, setAminoAcidsUrls] = useState("");
-  // const [vitaminsUrls, setVitaminsUrls] = useState("");
-  // const [otherUrls, setOtherUrls] = useState("");
-  // const [snacksUrls, setSnacksUrls] = useState("");
-  // const [preWorkoutsUrls, setPreWorkoutsUrls] = useState("");
 
   // const [loading, setLoading] = useState(true);
 
@@ -187,141 +179,29 @@ function Eshop() {
     console.log();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchImages = async (Name, stateSetter) => {
-  //     try {
-  //       const imagesRef = ref(storage, `product_images/${Name}`);
-  //       const imageList = await listAll(imagesRef);
-
-  //       const urls = await Promise.all(
-  //         imageList.items.map(async (imageRef) => {
-  //           const url = await getDownloadURL(imageRef);
-  //           return url;
-  //         })
-  //       );
-
-  //       const mappedUrls = urls.map((url) => ({ img: url }));
-  //       stateSetter(mappedUrls);
-  //     } catch (error) {
-  //       console.log(`Error fetching ${Name} images:`, error);
-  //     }
-  //   };
-
-  //   // Fetch images for each category
-  //   fetchImages("protein", setProteinUrls);
-  //   fetchImages("creatine", setCreatineUrls);
-  //   fetchImages("aminoacids", setAminoAcidsUrls);
-  //   fetchImages("vitamins", setVitaminsUrls);
-  //   fetchImages("other", setOtherUrls);
-  //   fetchImages("snacks", setSnacksUrls);
-  //   fetchImages("preworkout", setPreWorkoutsUrls);
-
-  //   setLoading(false);
-  // }, []);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const docRef = doc(db, "products", "P2VKQYB2z6YIM2khjaWN");
-  //     const docSnap = await getDoc(docRef);
-  //     if (docSnap.exists()) {
-  //       const updatedProteinData = docSnap.data().protein.map((item, index) => {
-  //         return {
-  //           ...item,
-  //           img: proteinUrls[index]?.img,
-  //         };
-  //       });
-  //       const updatedCreatineData = docSnap
-  //         .data()
-  //         .creatine.map((item, index) => {
-  //           return {
-  //             ...item,
-  //             img: creatineUrls[index]?.img,
-  //           };
-  //         });
-  //       const updatedAminoAcidsData = docSnap
-  //         .data()
-  //         .aminoAcids.map((item, index) => {
-  //           return {
-  //             ...item,
-  //             img: aminoAcidsUrls[index]?.img,
-  //           };
-  //         });
-  //       const updatedVitaminsData = docSnap
-  //         .data()
-  //         .vitamins.map((item, index) => {
-  //           return {
-  //             ...item,
-  //             img: vitaminsUrls[index]?.img,
-  //           };
-  //         });
-  //       const updatedOtherData = docSnap.data().other.map((item, index) => {
-  //         return {
-  //           ...item,
-  //           img: otherUrls[index]?.img,
-  //         };
-  //       });
-  //       const updatedSnacksData = docSnap.data().snacks.map((item, index) => {
-  //         return {
-  //           ...item,
-  //           img: snacksUrls[index]?.img,
-  //         };
-  //       });
-  //       const updatedPreWorkoutsData = docSnap
-  //         .data()
-  //         .preWorkouts.map((item, index) => {
-  //           return {
-  //             ...item,
-  //             img: preWorkoutsUrls[index]?.img,
-  //           };
-  //         });
-  //       setProteinData(updatedProteinData);
-  //       setCreatineData(updatedCreatineData);
-  //       setAminoAcidsData(updatedAminoAcidsData);
-  //       setOtherData(updatedOtherData);
-  //       setVitaminsData(updatedVitaminsData);
-  //       setPreWorkoutsData(updatedPreWorkoutsData);
-  //       setSnacksData(updatedSnacksData);
-
-  //       console.log(preWorkoutsData);
-  //     } else {
-  //       setProteinData([]);
-  //       setCreatineData([]);
-  //       setOtherData([]);
-  //       setAminoAcidsData([]);
-  //       setVitaminsData([]);
-  //       setPreWorkoutsData([]);
-  //       setSnacksData([]);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
 
   const Proteins = () => {
     return (
       <>
         {proteinData.map((protein, index) => {
-          // Check if the volume is greater than or equal to 1
-          return protein.volume >= 1 ? (
+          return (
             <div className="ProductCard" key={index}>
               <label>{protein.label}</label>
-              <img
-                src={protein.img}
-                alt={protein.label}
-                className="CardImage"
-              ></img>
-              <span className="Click">Go to description</span>
-            </div>
-          ) : (
-            <div className="ProductCard" key={index}>
-              <label>{protein.label}</label>
-              <div>Out of stock!</div>
+              {/* Create a link to the product details page */}
+              <Link to={`/Supplements/${encodeURIComponent(protein.label)}`}>
+                <img
+                  src={protein.img}
+                  alt={protein.label}
+                  className="CardImage"
+                />
+              </Link>
               <span className="Click">Go to description</span>
             </div>
           );
         })}
       </>
     );
-  };  
+  };
   const Creatines = () => {
     return (
       <>
@@ -329,11 +209,13 @@ function Eshop() {
           return creatine.volume >= 1 ? (
             <div className="ProductCard" key={index}>
               <label>{creatine.label}</label>
-              <img
-                src={creatine.img}
-                alt={creatine.label}
-                className="CardImage"
-              ></img>
+              <Link to={`/Supplements/${encodeURIComponent(creatine.label)}`}>
+                <img
+                  src={creatine.img}
+                  alt={creatine.label}
+                  className="CardImage"
+                />
+              </Link>
               <span className="Click">Go to description</span>
             </div>
           ) : (
@@ -355,11 +237,13 @@ function Eshop() {
           return aminoAcids.volume >= 1 ? (
             <div className="ProductCard" key={index}>
               <label>{aminoAcids.label}</label>
-              <img
-                src={aminoAcids.img}
-                alt={aminoAcids.label}
-                className="CardImage"
-              ></img>
+              <Link to={`/Supplements/${encodeURIComponent(aminoAcids.label)}`}>
+                <img
+                  src={aminoAcids.img}
+                  alt={aminoAcids.label}
+                  className="CardImage"
+                />
+              </Link>
               <span className="Click">Go to description</span>
             </div>
           ) : (
@@ -381,11 +265,13 @@ function Eshop() {
           return preWorkouts.volume >= 1 ? (
             <div className="ProductCard" key={index}>
               <label>{preWorkouts.label}</label>
-              <img
-                src={preWorkouts.img}
-                alt={preWorkouts.label}
-                className="CardImage"
-              ></img>
+              <Link to={`/Supplements/${encodeURIComponent(preWorkouts.label)}`}>
+                <img
+                  src={preWorkouts.img}
+                  alt={preWorkouts.label}
+                  className="CardImage"
+                />
+              </Link>
               <span className="Click">Go to description</span>
             </div>
           ) : (
@@ -407,11 +293,13 @@ function Eshop() {
           return vitamins.volume >= 1 ? (
             <div className="ProductCard" key={index}>
               <label>{vitamins.label}</label>
-              <img
-                src={vitamins.img}
-                alt={vitamins.label}
-                className="CardImage"
-              ></img>
+              <Link to={`/Supplements/${encodeURIComponent(vitamins.label)}`}>
+                <img
+                  src={vitamins.img}
+                  alt={vitamins.label}
+                  className="CardImage"
+                />
+              </Link>
               <span className="Click">Go to description</span>
             </div>
           ) : (
@@ -433,11 +321,13 @@ function Eshop() {
           return other.volume >= 1 ? (
             <div className="ProductCard" key={index}>
               <label>{other.label}</label>
-              <img
-                src={other.img}
-                alt={other.label}
-                className="CardImage"
-              ></img>
+              <Link to={`/Supplements/${encodeURIComponent(other.label)}`}>
+                <img
+                  src={other.img}
+                  alt={other.label}
+                  className="CardImage"
+                />
+              </Link>
               <span className="Click">Go to description</span>
             </div>
           ) : (
@@ -459,11 +349,13 @@ function Eshop() {
           return snacks.volume >= 1 ? (
             <div className="ProductCard" key={index}>
               <label>{snacks.label}</label>
-              <img
-                src={snacks.img}
-                alt={snacks.label}
-                className="CardImage"
-              ></img>
+              <Link to={`/Supplements/${encodeURIComponent(snacks.label)}`}>
+                <img
+                  src={snacks.img}
+                  alt={snacks.label}
+                  className="CardImage"
+                />
+              </Link>
               <span className="Click">Go to description</span>
             </div>
           ) : (

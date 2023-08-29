@@ -1,0 +1,26 @@
+.Background2 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: antiquewhite;
+}
+
+.Description {
+  margin: 100px;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 800px;
+  width: 1200px;
+  background-color: rgb(255, 255, 255);
+  /* border: thin solid black; */
+  box-shadow: 0px 10px 10px -13px;
+  justify-content:space-between;
+  align-items: center;
+}
+
+.Description img {
+  height: 100%;
+  width: 50%;
+}
+
+

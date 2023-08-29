@@ -107,7 +107,6 @@
   background-color: #999999; /* Set the color of the scrollbar thumb */
 }
 
-
 .ProductCard {
   display: flex;
   flex-direction: column-reverse;
@@ -157,7 +156,7 @@
   opacity: 0;
   transform: translateY(-25px);
   /* Position the tooltip */
-  position: relative;
+  position:relative;
   z-index: 99;
   transition-delay: 0.3s;
   transition: all 0.25s;

@@ -5,6 +5,7 @@ import Subscriptions from "../components/Subscriptions.js";
 import Contact from "../components/Contact.js";
 import Profile from "../components/Profile";
 import DashBoard from "../components/DashBoard.js";
+import SupplementDescription from "./SupplementDescription.js";
 // import ModalSwitch from "./ModalSwitch.js";
 import Modal1 from "./Modal1.js";
 import Modal2 from "./Modal2.js";
@@ -22,6 +23,7 @@ function OwnRoutes() {
         <Route path="/Supplements" element={<Eshop />} />
         <Route path="/Programs" element={<Programs />} />
         <Route path="/Subscriptions" element={<Subscriptions />} />
+        <Route exact path="/Supplements/:productName" element={<SupplementDescription />} />
         {/* <Route path="/Contact" element={<Contact />} /> */}
         {/* <Route path="/Profile/DashBoard" element={<DashBoard />} /> */}
       </Routes>
