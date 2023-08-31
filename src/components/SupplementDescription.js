@@ -3,6 +3,9 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useState } from "react";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const SupplementDescription = () => {
   const { productName } = useParams();
@@ -16,6 +19,52 @@ const SupplementDescription = () => {
   const [otherData, setOtherData] = useState([]);
   const [snacksData, setSnacksData] = useState([]);
   const [proteinData, setProteinData] = useState([]);
+
+  const allProductsData = [
+    ...proteinData,
+    ...creatineData,
+    ...aminoAcidsData,
+    ...preWorkoutsData,
+    ...vitaminsData,
+    ...otherData,
+    ...snacksData,
+  ];
+
+  function renderVolume(dataArray, productName) {
+    const product = dataArray.find((product) => product.label === productName);
+
+    if (product) {
+      return (
+        <sub className="Volume" key={product.label}>
+          {product.volume} left in stock
+        </sub>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  async function fetchData() {
+    try {
+      const docRef = doc(db, "products", "P2VKQYB2z6YIM2khjaWN");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setProteinData(data.protein);
+        setCreatineData(data.creatine);
+        setAminoAcidsData(data.aminoAcids);
+        setPreWorkoutsData(data.preWorkouts);
+        setVitaminsData(data.vitamins);
+        setOtherData(data.other);
+        setSnacksData(data.snacks);
+      } else {
+        console.log("Document does not exist");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 
   async function fetchImages() {
     try {
@@ -92,15 +141,15 @@ const SupplementDescription = () => {
         "Creatine Monohydrate": creatineUrl,
         "Omega-3's": omegaUrl,
         "Night Burn": nightUrl,
-        Carnitine: carnitineUrl,
+        "Carnitine": carnitineUrl,
         "Magnesium Shot": magnesiumUrl,
         "MOXY energy drink": moxyUrl,
         "Beta Alanine": betaUrl,
-        Maltodextrine: maltodextrineUrl,
+        "Maltodextrine": maltodextrineUrl,
         "BCAA's": bcaasUrl,
         "Multi Vitamin": multiUrl,
         "Peanut Butter": peanutUrl,
-        Praline: pralineUrl,
+        "Praline": pralineUrl,
         "Protein Waffles": wafflesUrl,
       };
       setUrlMapping(newUrlMapping);
@@ -154,6 +203,7 @@ const SupplementDescription = () => {
   }
 
   useEffect(() => {
+    fetchData();
     fetchImages();
   }, []);
 
@@ -168,8 +218,29 @@ const SupplementDescription = () => {
       <div className="Background2">
         <div className="Description">
           <div className="RightSide">
-            <h2>{productName}</h2>
-            
+            <div className="TitleAndVolume">
+              <h2>{productName}</h2>
+              {renderVolume(allProductsData, productName)}
+            </div>
+            <p>
+              Anabolic Whey is a multicomponent dietary supplement composed of a
+              blend of whey protein concentrate (WPC) and casein, providing a
+              combination of rapidly and slowly absorbed proteins that aid in
+              muscle growth and maintenance. It is also enriched with glutamine
+              peptides and creatine monohydrate, which can improve physical
+              performance during intense workouts.
+            </p>
+            <div className="SubNote">
+              <sub>*All purchases and deliveries are made in store.</sub>
+              <sub>
+                <Link to={`/Contact`}>
+                  <span class="material-symbols-outlined">
+                    subdirectory_arrow_right
+                  </span>
+                  Contact us here
+                </Link>
+              </sub>
+            </div>
           </div>
           <div className="LeftSide">
             {productImage && <img src={productImage} alt={productName} />}

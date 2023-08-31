@@ -128,7 +128,7 @@
 .CardImage {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   scale: 1.1;
   transition: opacity 0.25s, scale 0.35s;
   overflow: hidden;
