@@ -56,9 +56,17 @@
   align-items: baseline;
 }
 
-.Volume {
+.Details {
   display: flex;
+  width: 100%;
+  gap: 2vmax;
+  align-items: baseline;
   color: gray;
+}
+
+.Details :nth-child(2) {
+  font-size: larger;
+  color: black
 }
 
 .SubNote {
