@@ -10,13 +10,15 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
+  gap: 15vmax;
+  color: rgba(0, 0, 0, 0.75);
 }
 
 .ContactInfo p {
   white-space: break-spaces;
   display: flex;
   text-align: center;
-  font-size: 25px;
+  font-size: 2.5vmax;
   width: 50%;
 }
 
@@ -25,7 +27,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  font-size: 45px;
+  font-size: 3vmax;
 }
 
 .Telephones {
