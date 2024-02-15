@@ -1,7 +1,7 @@
 import "./styles/DashBoard.css";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, query, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -25,6 +25,8 @@ function DashBoard() {
   const femaleProfile = female;
   const [profilePic, setProfilePic] = useState(null);
 
+  const [userList, setUserList] = useState([]);
+
   useEffect(() => {
     const listen = onAuthStateChanged(getAuth(), (user) => {
       if (user) {
@@ -32,13 +34,14 @@ function DashBoard() {
         const userId = user.uid;
 
         class Users {
-          constructor(username, gender, dob) {
+          constructor(username, gender, dob, email) {
             this.username = username;
             this.gender = gender;
             this.dob = dob;
+            this.email = email;
           }
           toString() {
-            return this.name + ", " + this.gender + ", " + this.dob;
+            return this.name + ", " + this.gender + ", " + this.dob + ", " + this.email;
           }
         }
 
@@ -48,11 +51,12 @@ function DashBoard() {
               username: users.username,
               gender: users.gender,
               dob: users.dob,
+              email: users.email,
             };
           },
           fromFirestore: (snapshot, options) => {
             const data = snapshot.data(options);
-            return new Users(data.username, data.gender, data.dob);
+            return new Users(data.username, data.gender, data.dob, data.email);
           },
         };
 
@@ -66,13 +70,14 @@ function DashBoard() {
               username: userData.username,
               gender: userData.gender,
               dob: userData.dob,
+              email: userData.email,
             });
             console.log(docSnap.data());
             setQrCodeData(`${userData.username}\n${user.email}`);
-            if (userData.gender == "Male") {
+            if (userData.gender === "Male") {
               setProfilePic(maleProfile);
             }
-            if (userData.gender == "Female") {
+            if (userData.gender === "Female") {
               setProfilePic(femaleProfile);
             }
             history("/Profile/DashBoard");
@@ -81,7 +86,28 @@ function DashBoard() {
             history("/Profile/DashBoard/PersonalInfo");
           }
         }
+
         fetchData();
+
+        async function getUsers() {
+          const q = query(collection(db, "users"));
+          const querySnapshot = await getDocs(q);
+          const users = [];
+          querySnapshot.forEach((doc) => {
+            console.log(doc.id, doc.data());
+            const userData = doc.data();
+            users.push({
+              id: doc.id,
+              name: userData.username,
+              gender: userData.gender,
+              dob: userData.dob,
+              email: userData.email,
+            });
+          });
+          setUserList(users);
+        }
+
+        getUsers();
         const timer = setTimeout(() => {
           userSignOut();
         }, LOGOUT_THRESHOLD);
@@ -94,6 +120,7 @@ function DashBoard() {
     });
     return () => listen();
   }, []);
+
 
   const userSignOut = () => {
     signOut(auth)
@@ -110,7 +137,7 @@ function DashBoard() {
     <div className="DashBoardContainer">
       <div className="FirstContainer">
         <div className="NameContainer">
-          {authUser ? (
+          {authUser && authUser.email !== "admin@email.com" ? (
             <>
               <div className="AnotherContainer">
                 <div className="PictureAndName">
@@ -198,9 +225,39 @@ function DashBoard() {
 
               <button onClick={userSignOut}>Log Out</button>
             </>
+          ) : (authUser && authUser.email === "admin@email.com" ? (
+            <>
+              <div>
+                <p>Welcome admin</p>
+              </div>
+              <div className="ListOfUsers">
+                <h1>List of Users</h1>
+                <table className="UserTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Gender</th>
+                      <th>Date of Birth</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {userList.map((user) => (
+                      <tr key={user.id}>
+                        <td>{user.name}</td>
+                        <td>{user.gender}</td>
+                        <td>{user.dob}</td>
+                        <td>{user.email}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <button onClick={userSignOut}>Log Out</button>
+            </>
           ) : (
             <p>Logged Out</p>
-          )}
+          ))}
         </div>
       </div>
       <Outlet />

@@ -6,6 +6,7 @@ import OwnRoutes from "./components/OwnRoutes.js";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
+  
   return (
     <section>
         <AuthProvider>

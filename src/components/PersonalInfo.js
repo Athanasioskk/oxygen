@@ -13,6 +13,7 @@ function PersonalInfo() {
     username: "",
     gender: "",
     dob: "",
+    email: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -66,6 +67,7 @@ function PersonalInfo() {
           username: formData.username,
           gender: formData.gender,
           dob: formData.dob,
+          email: authUser.email, 
         },
         { merge: true }
       ); // Use {merge: true} to update only the fields that were changed
@@ -77,7 +79,7 @@ function PersonalInfo() {
       console.error("Error updating user info:", error);
       setLoading(false);
     }
-    return  window.location.reload();
+    return window.location.reload();
   };
 
   return (
